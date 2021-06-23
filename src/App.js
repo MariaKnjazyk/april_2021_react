@@ -1,5 +1,6 @@
-import Users from "./components/users/Users";
+
 import Menu from "./components/menu/Menu";
+import Posts from "./components/posts/Posts";
 
 export default function App() {
   return (
@@ -8,7 +9,7 @@ export default function App() {
           pages={['users page', 'comments page','posts page']}
           classes={['xxx','yyy']}
       />
-      <Users/>
+      <Posts/>
       <Menu
           pages={['about','team']}
           classes={['asd','qwe']}
