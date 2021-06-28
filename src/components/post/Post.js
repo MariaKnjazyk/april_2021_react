@@ -1,8 +1,8 @@
-export default function User({item, fnFather}) {
+export default function Post({item, fnFather}) {
 
     return (
         <div>
-            {item.id} - {item.name} -
+            {item.id} - {item.title} -
             <button
                 onClick={
                     ()=> fnFather(item.id)
