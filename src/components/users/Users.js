@@ -1,27 +1,16 @@
-import {useEffect, useState} from "react";
-import User from "../user/User";
+import User from '../user/User';
 
-export default function Users(props){
+export default function Users({items,appFn}) {
 
-    let [users,setUsers]=useState([]);
 
-    useEffect(()=>{
-        fetch('https://jsonplaceholder.typicode.com/users')
-            .then(value=> value.json())
-            .then(userssromServer=>{
-                setUsers(userssromServer);
-            })
-    },[])
 
     return (
         <div>
-
             {
-                users.map(user => <User item={user} />)
+                items.map((value) => <User key={value.id} item={value} fnFather={appFn}/>)
             }
 
         </div>
     );
-
 }
 
