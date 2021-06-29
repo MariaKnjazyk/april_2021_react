@@ -8,6 +8,7 @@ export default function Posts() {
     let postFn=(id)=>{
         getPostComm(id).then(value=>setPostComm(value));
     };
+
     let [posts, setPosts]=useState([]);
     useEffect(()=>{
         getItems('posts').then(value => setPosts(value));

@@ -23,7 +23,6 @@ export default function App() {
                      <Route path={'/users'} render={(props) => <Users {...props}/> }/>
                      <Route path={'/posts'} render={(props) => <Posts {...props}/> }/>
                      <Route path={'/comments'} render={(props) => <Comments {...props}/> }/>
-
                      <Route path={'/'} render={() => <div>HOME PAGE</div>}/>
 
                    </Switch>

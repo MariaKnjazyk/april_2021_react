@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import {getUserPosts, getItems} from "../../services/API";
 
 export default function Users() {
+
     let [userPosts, setUserPosts]=useState();
     let userFn=(id)=>{
         getUserPosts(id).then(value=>setUserPosts(value));
