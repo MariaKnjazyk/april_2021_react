@@ -7,7 +7,7 @@ export default function Post({item, fnFather}) {
                 onClick={
                     ()=> fnFather(item.id)
 
-                }>Info</button>}
+                }>Comments</button>}
 
         </div>
     );

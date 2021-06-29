@@ -7,7 +7,7 @@ export default function User({item, fnFather}) {
                 onClick={
                     ()=> fnFather(item.id)
 
-                }>Info</button>
+                }>Posts</button>
 
         </div>
     );
