@@ -1,9 +1,8 @@
 import {useEffect, useState} from 'react';
 import {getUsers} from '../../services/user.service';
 import User from '../user/User';
-import {Route, Switch} from 'react-router-dom';
-import UserDetails from '../user_details/UserDetails';
-import UserDetails2 from '../user_details2/UserDetail2';
+import {Route} from 'react-router-dom';
+import UserPosts from '../user_posts/UserPosts';
 
 export default function Users() {
 
@@ -15,9 +14,9 @@ export default function Users() {
     return (
         <div>
             {users.map(value => <User key={value.id} item={value}/>)}
+            <hr/>
 
-            {/*<Route path={'/users/:id'} component={UserDetails}/>*/}
-            <Route path={'/users/:id'} component={UserDetails2}/>
+            <Route path={'/users/:id/posts'} component={UserPosts}/>
 
         </div>
     );
