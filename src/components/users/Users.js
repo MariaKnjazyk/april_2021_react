@@ -16,7 +16,7 @@ export default function Users() {
             {users.map(value => <User key={value.id} item={value}/>)}
             <hr/>
 
-            <Route path={'/users/:id/posts'} component={UserPosts}/>
+            {/*<Route path={'/users/:id/posts'} component={UserPosts}/>*/}
 
         </div>
     );
