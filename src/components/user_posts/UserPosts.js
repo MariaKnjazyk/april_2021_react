@@ -1,22 +1,27 @@
 import {useParams} from 'react-router-dom';
-import {useEffect, useState} from 'react';
-import {getUserPosts} from '../../services/user.service';
+import {useEffect} from 'react';
 import Post from "../post/Post";
+import {useDispatch, useSelector} from "react-redux";
+import {getPosts} from "../../services/post.service";
 
-export default function UserPosts({id}) {
+export default function UserPosts() {
 
-    let [userPosts, setUserPosts] = useState([]);
-    // let {id} = useParams();
-    console.log(id);
-     useEffect(() => {
-        getUserPosts(id).then(value => setUserPosts([...value.data]));
-    }, [id]);
+    const posts = useSelector(({posts}) => posts);
+    const dispatch = useDispatch();
+    const {id} = useParams();
+
+    useEffect(() => {
+        if(posts.isEmpty){
+            getPosts().then(value => dispatch({type:'ADD_POSTS',payload: value.data}));
+        }
+
+       }, []);
 
 
     return (
         <div>
             {
-                userPosts.map(value => <Post key={value.id} item={value}/>)
+                posts.value.filter(value => value.userId==id).map(value => <Post key={value.id} item={value}/>)
             }
 
         </div>

@@ -1,17 +1,24 @@
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {getComments} from "../../services/comment.service";
 import Comment from "../comment/Comment";
+import {useDispatch, useSelector} from "react-redux";
+
 
 export default function Comments() {
 
-    let [comments, setComments] = useState([]);
+    const comments = useSelector(({comments}) => comments);
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        getComments().then(value => setComments([...value.data]));
+        if(comments.isEmpty){
+            getComments().then(value => dispatch({type:'ADD_COMMENTS',payload: value.data}));
+        }
+
     }, []);
 
     return (
         <div>
-            {comments.map(value => <Comment key={value.id} item={value}/>)}
+            {comments.value.map(value => <Comment key={value.id} item={value}/>)}
 
         </div>
     );

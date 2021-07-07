@@ -1,22 +1,34 @@
 import {useEffect, useState} from 'react';
 import {getUsers} from '../../services/user.service';
 import User from '../user/User';
-import {Route} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import UserPosts from '../user_posts/UserPosts';
+import {useDispatch, useSelector} from "react-redux";
+import UserTodos from "../user_todos/UserTodos";
+import UserAlbums from "../user_albums/UserAlbums";
+
 
 export default function Users() {
 
-    let [users, setUsers] = useState([]);
+    const users = useSelector(({users}) => users);
+    const dispatch = useDispatch();
+    // let [users, setUsers] = useState([]);
     useEffect(() => {
-        getUsers().then(value => setUsers([...value.data]));
+        // getUsers().then(value => setUsers([...value.data]));
+        if(users.isEmpty){
+            getUsers().then(value => dispatch({type:'ADD_USERS',payload: value.data}));
+        }
     }, []);
 
     return (
         <div>
-            {users.map(value => <User key={value.id} item={value}/>)}
+            {users.value.map(value => <User key={value.id} item={value}/>)}
             <hr/>
-
-            {/*<Route path={'/users/:id/posts'} component={UserPosts}/>*/}
+        <Switch>
+            <Route path={'/users/:id/posts'} component={UserPosts}/>
+            <Route path={'/users/:id/todos'} component={UserTodos}/>
+            <Route path={'/users/:id/albums'} component={UserAlbums}/>
+        </Switch>
 
         </div>
     );

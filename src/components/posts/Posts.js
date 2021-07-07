@@ -3,17 +3,22 @@ import {getPosts} from '../../services/post.service';
 import {Route} from 'react-router-dom';
 import Post from "../post/Post";
 import PostComments from "../postComments/PostComments";
+import {useDispatch, useSelector} from "react-redux";
 
 export default function Posts() {
 
-    let [posts, setPosts] = useState([]);
+    const posts = useSelector(({posts}) => posts);
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        getPosts().then(value => setPosts([...value.data]));
+        if(posts.isEmpty){
+           getPosts().then(value => dispatch({type:'ADD_POSTS',payload: value.data}));
+        }
     }, []);
 
     return (
         <div>
-            {posts.map(value => <Post key={value.id} item={value} ln={true}/>)}
+            {posts.value.map(value => <Post key={value.id} item={value} ln={true}/>)}
             <hr/>
 
             <Route path={'/posts/:id/comments'} component={PostComments}/>
