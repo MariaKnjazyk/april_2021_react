@@ -1,57 +1,28 @@
 import {useDispatch, useSelector} from 'react-redux'
-import {createRef} from "react";
+import {useState} from "react";
 
-
-export default function Counter(){
-
+export default function Counter() {
     const counter = useSelector(({counter: {value}}) => value)
     const dispatch = useDispatch();
-    const step=createRef();
+    const [inputValue, setInputValue] = useState('');
+    const incOnClick=()=>dispatch({type: 'INC'});
+    const decOnClick=()=>dispatch({type: 'DEC'});
+    const resOnClick=()=>dispatch({type: 'RES'});
+    const onChange=({target: {value}}) => setInputValue(value);
+    const userOnClick=()=>dispatch({type: 'INC_CAST', payload: inputValue});
+
+
 
     return (
         <div>
-
-            <button
-                onClick={() => {
-                    dispatch({type: 'INC'})
-                }}
-            >
-                inc
-            </button>
-
-            <button
-                onClick={() => {
-                    dispatch({type: 'DEC'})
-                }}
-            >
-                dec
-            </button>
-
-            <button
-                onClick={() => {
-                    dispatch({type: 'RES'})
-                }}
-            >
-                reset
-            </button>
-
+            <button onClick={incOnClick}>inc</button>
+            <button onClick={decOnClick}>dec</button>
+            <button onClick={resOnClick}>reset</button>
             <br/>
+            <label>Збільшити на:<input type='number' name={'step'} placeholder={'step'} value={inputValue} onChange={onChange}/></label>
+            <button onClick={userOnClick}>збільшити</button>
 
-            <form onSubmit={(e)=>{
-                e.preventDefault();
-                dispatch({type: 'INC_CAST', payload: step.current.value})}
-
-            }>
-                <label>
-                    Збільшити на:
-                    <input type="text" name={"step"} ref={step}/>
-                </label>
-                <button>
-                    збільшити
-                </button>
-            </form>
             <h1>{counter}</h1>
-
 
 
         </div>
